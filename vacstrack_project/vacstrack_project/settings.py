@@ -27,28 +27,6 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-import os  # Add this at the top if missing
-
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'static'),
-]
-
-TEMPLATES = [
-    {
-        'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')],  # Points to your global templates folder
-        'APP_DIRS': True,  # Keeps app-specific templates working
-        'OPTIONS': {
-            'context_processors': [
-                'django.template.context_processors.debug',
-                'django.template.context_processors.request',
-                'django.contrib.auth.context_processors.auth',
-                'django.contrib.messages.context_processors.messages',
-            ],
-        },
-    },
-]
-
 
 # Application definition
 
