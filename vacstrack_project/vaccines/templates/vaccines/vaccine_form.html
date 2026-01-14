@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% load static %}  <!-- Add this at the top -->
+
+{% block title %}Add Record - Vacstrack{% endblock %}
+
+{% block content %}
+<h2>Add Vaccine Record</h2>
+
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-success">Save</button>
+    <a href="{% url 'dashboard' %}" class="btn btn-secondary">Cancel</a>
+</form>
+{% endblock %}
