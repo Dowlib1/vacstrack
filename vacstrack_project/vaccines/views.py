@@ -3,6 +3,11 @@ from django.contrib.auth.decorators import login_required
 from .models import VaccineLog
 from .forms import VaccineLogForm
 from django.contrib import messages
+from django.http import HttpResponse
+import csv
+from django.utils import timezone
+
+
 
 @login_required
 def dashboard(request):
@@ -52,3 +57,15 @@ def vaccine_delete(request, pk):
         messages.success(request, "Vaccine log deleted.")
         return redirect('vaccines:list')
     return render(request, 'vaccines/vaccine_confirm_delete.html', {'object': v})
+
+@login_required
+def export_csv(request):
+    user = request.user
+    logs = VaccineLog.objects.filter(user=user).order_by('-date_administered')
+    response = HttpResponse(content_type='text/csv')
+    response['Content-Disposition'] = 'attachment; filename="vaccine_logs.csv"'
+    writer = csv.writer(response)
+    writer.writerow(['Vaccine Type', 'Date Administered', 'Next Due Date', 'Notes', 'Created At'])
+    for l in logs:
+        writer.writerow([l.vaccine_type, l.date_administered, l.next_due_date or '', l.notes, l.created_at])
+    return response
