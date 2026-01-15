@@ -1,5 +1,22 @@
-venv/
+# Python
 __pycache__/
-*.pyc
+*.py[cod]
 *.sqlite3
 .env
+.env.*
+.venv/
+venv/
+pip-wheel-metadata/
+*.egg-info/
+
+# Django
+staticfiles/
+static/
+media/
+
+# IDEs
+.vscode/
+.idea/
+
+# OS
+.DS_Store
